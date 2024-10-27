@@ -1,0 +1,122 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Movie {
+    string movieName;
+    int availableSeats;
+    int pricePerTicket;
+
+public:
+    Movie(string name, int seats, int price) {
+        movieName = name;
+        availableSeats = seats;
+        pricePerTicket = price;
+    }
+
+    void showMovieDetails() const {
+        cout << "\nMovie: " << movieName;
+        cout << "\nAvailable Seats: " << availableSeats;
+        cout << "\nPrice per Ticket: $" << pricePerTicket << "\n";
+    }
+
+    bool bookTickets(int numSeats) {
+        if (numSeats > availableSeats) {
+            cout << "\nNot enough seats available!\n";
+            return false;
+        } else {
+            availableSeats -= numSeats;
+            cout << "\n" << numSeats << " tickets booked successfully for " << movieName << "!\n";
+            cout << "Total Price: $" << numSeats * pricePerTicket << "\n";
+            return true;
+        }
+    }
+
+    void showAvailableSeats() const {
+        cout << "\nAvailable seats for " << movieName << ": " << availableSeats << "\n";
+    }
+};
+
+int main() {
+    int choice, numSeats;
+
+    Movie movie1("The Matrix", 50, 10);
+    Movie movie2("Inception", 40, 12);
+    Movie movie3("Avengers", 60, 15);
+
+    do {
+        cout << "\n\n--- Movie Ticket Booking System ---";
+        cout << "\n1. View Movie Details";
+        cout << "\n2. Book Tickets";
+        cout << "\n3. View Available Seats";
+        cout << "\n4. Exit";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "\nSelect Movie: ";
+                cout << "\n1. The Matrix";
+                cout << "\n2. Inception";
+                cout << "\n3. Avengers";
+                cout << "\nEnter your choice: ";
+                cin >> choice;
+                if (choice == 1)
+                    movie1.showMovieDetails();
+                else if (choice == 2)
+                    movie2.showMovieDetails();
+                else if (choice == 3)
+                    movie3.showMovieDetails();
+                else
+                    cout << "Invalid choice!\n";
+                break;
+
+            case 2:
+                cout << "\nSelect Movie to Book Tickets: ";
+                cout << "\n1. The Matrix";
+                cout << "\n2. Inception";
+                cout << "\n3. Avengers";
+                cout << "\nEnter your choice: ";
+                cin >> choice;
+                cout << "Enter number of tickets to book: ";
+                cin >> numSeats;
+
+                if (choice == 1)
+                    movie1.bookTickets(numSeats);
+                else if (choice == 2)
+                    movie2.bookTickets(numSeats);
+                else if (choice == 3)
+                    movie3.bookTickets(numSeats);
+                else
+                    cout << "Invalid choice!\n";
+                break;
+
+            case 3:
+                cout << "\nSelect Movie to View Available Seats: ";
+                cout << "\n1. The Matrix";
+                cout << "\n2. Inception";
+                cout << "\n3. Avengers";
+                cout << "\nEnter your choice: ";
+                cin >> choice;
+
+                if (choice == 1)
+                    movie1.showAvailableSeats();
+                else if (choice == 2)
+                    movie2.showAvailableSeats();
+                else if (choice == 3)
+                    movie3.showAvailableSeats();
+                else
+                    cout << "Invalid choice!\n";
+                break;
+
+            case 4:
+                cout << "Exiting...\n";
+                break;
+
+            default:
+                cout << "Invalid choice! Please try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
